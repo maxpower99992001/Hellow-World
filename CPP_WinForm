@@ -1,0 +1,26 @@
+1.安裝C++桌面開發的套件，然後特別注意的是，要進去個別元件搜尋cli，把建置工具的C++/Cli支援也打勾一併安裝，預設是不會安裝這個套件的，但如果不安裝你會沒辦法創建專案。
+
+2.接下來開始創建專案，選擇CLR空白專案(.net framwork)
+
+3.對專案點右建 -> 加入 -> 新增項目，並在左側選單選擇UI，找到windows form，然後加入。
+
+4.Myform.cpp裡面加上下面的程式碼
+using namespace XXXXXXX; // your project name  因為名稱有時會自動被改，在表單快按2下，自動建立formload事件並跳入程式碼內，再copy上面的namespace XXXXXXX 貼過來
+using namespace System::Windows::Forms;
+[STAThreadAttribute]
+int main(void)
+{
+ //true == 1, false == 0
+ // 建立任何控制項之前，先啟用 Windows XP 視覺化效果
+ Application::EnableVisualStyles();
+ Application::SetCompatibleTextRenderingDefault(false);
+
+ // 建立主視窗並執行
+ Application::Run(gcnew MyForm());
+
+ //結束程式執行，並回傳 0 代表程式執行正常無異狀。
+ return 0;
+}
+
+5.如果不想要出現後面的command line視窗，對專案點右鍵->屬性->連結器->系統-> 把子系統改成 Windows (/SUBSYSTEM:WINDOWS)
+  然後從連結器 -> 進階 -> 把進入點改成 main ，MyForm.cpp裡面加的那個main。
